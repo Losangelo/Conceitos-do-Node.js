@@ -9,7 +9,8 @@ describe("Repositories", () => {
       .send({
         url: "https://github.com/Rocketseat/umbriel",
         title: "Umbriel",
-        techs: ["Node", "Express", "TypeScript"]
+        techs: ["Node", "Express", "TypeScript"],
+        likes: 0
       });
 
     expect(isUuid(response.body.id)).toBe(true);
@@ -28,7 +29,8 @@ describe("Repositories", () => {
       .send({
         url: "https://github.com/Rocketseat/umbriel",
         title: "Umbriel",
-        techs: ["Node", "Express", "TypeScript"]
+        techs: ["Node", "Express", "TypeScript"],
+        likes: 0
       });
 
     const response = await request(app).get("/repositories");
@@ -52,7 +54,8 @@ describe("Repositories", () => {
       .send({
         url: "https://github.com/Rocketseat/umbriel",
         title: "Umbriel",
-        techs: ["Node", "Express", "TypeScript"]
+        techs: ["Node", "Express", "TypeScript"],
+        likes: 15
       });
 
     const response = await request(app)
@@ -92,7 +95,7 @@ describe("Repositories", () => {
       });
 
     expect(response.body).toMatchObject({
-      likes: 0
+      likes: 15
     });
   });
 
@@ -105,7 +108,7 @@ describe("Repositories", () => {
         techs: ["Node", "Express", "TypeScript"]
       });
 
-    await request(app).delete(`/repositories/${response.body.id}`).expect(204);
+    await request(app).delete(`/repositories/${response.body.id}`).expect(200);
 
     const repositories = await request(app).get("/repositories");
 
